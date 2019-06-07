@@ -1,0 +1,37 @@
+{
+    "name": "apex-nitro-template-react",
+    "version": "0.0.1",
+    "description": "APEX Nitro template for React apps",
+    "main": "init.js",
+    "bin": {
+        "apex-nitro-template-react": "./init.js"
+    },
+    "keywords": [
+        "oracle",
+        "apex",
+        "apex-nitro",
+        "javascript",
+        "react",
+        "library"
+    ],
+    "dependencies": {
+        "inquirer": "^6.2.0",
+        "semver-regex": "^2.0.0"
+    },
+    "devDependencies": {
+        "xo": "^0.24.0"
+    },
+    "scripts": {
+        "test": "xo",
+        "fix": "xo --fix"
+    },
+    "xo": {
+        "ignores": []
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/vincentmorneau/apex-nitro-template-react"
+    },
+    "author": "Vincent Morneau",
+    "license": "MIT"
+}
