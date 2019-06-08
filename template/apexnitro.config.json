@@ -1,0 +1,30 @@
+{
+  "mode": "pro",
+  "template": "git",
+  "gitUrl": "https://github.com/vincentmorneau/apex-nitro-template-react",
+  "projectName": "apexnitroreact",
+  "libraryCode": "apexnitroreact",
+  "main": "./src/main.js",  
+  "cssExtensions": [
+    ".css",
+    ".less"
+  ],
+  "srcFolder": "./src",
+  "distFolder": "./dist",
+  "appUrl": "http://localhost:50191/ords/f?p=140:1:",
+  "browsersync": {
+    "realTime": true,
+    "ghostMode": false,
+    "notify": true
+  },
+  "apex": {
+    "openBuilder": false
+  },
+  "publish": {
+    "destination": "application",
+    "path": "sqlcl",
+    "username": "",
+    "password": "",
+    "connectionString": ""
+  }
+}

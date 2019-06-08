@@ -1,13 +1,16 @@
 import resolve from 'rollup-plugin-node-resolve';
-import commonjs from 'rollup-plugin-commonjs';
 import babel from 'rollup-plugin-babel';
+import commonjs from 'rollup-plugin-commonjs';
+import globals from 'rollup-plugin-node-globals';
 import postcss from 'rollup-plugin-postcss';
 import cssnano from 'cssnano';
 import autoprefixer from 'autoprefixer';
 import replace from 'rollup-plugin-replace';
 import { terser } from 'rollup-plugin-terser';
-import { eslint } from 'rollup-plugin-eslint';
+
 import config from './apexnitro.config.json';
+
+const NODE_ENV = process.env.BUILD || "development";
 
 export default [
     {
@@ -15,41 +18,34 @@ export default [
         output: {
             name: config.libraryCode,
             file: `${config.distFolder}/${config.projectName}${
-                process.env.BUILD === 'production' ? '.min' : ''
+                NODE_ENV === 'production' ? '.min' : ''
             }.js`,
             format: 'iife',
-            sourcemap: process.env.BUILD === 'production' ? false : 'inline',
+            sourcemap: !(NODE_ENV === 'production'),
             globals: {
-                apex: 'apex',
-                React: 'React',
-                ReactDOM: 'ReactDOM',
+                apex: 'apex'
             },
         },
-        external: ['apex', 'React', 'ReactDOM'],
+        external: [
+            'apex'
+        ],
         plugins: [
             replace({
-                include: config.main,
-                values: {
-                    NPM_PACKAGE_PROJECT_NAME: config.projectName,
-                    NPM_PACKAGE_PROJECT_VERSION: config.version,
-                },
+                "APEX_NITRO_PROJECT_NAME": JSON.stringify(config.projectName),
+                "APEX_NITRO_PROJECT_VERSION": JSON.stringify(config.version || "1.0.0"),
+                "process.env.NODE_ENV": JSON.stringify('production')
             }),
             postcss({
-                extensions: config.cssExtensions,
-                plugins: process.env.BUILD === 'production' ? [autoprefixer(), cssnano()] : [],
-                extract: `${config.distFolder}/${config.projectName}${
-                    process.env.BUILD === 'production' ? '.min' : ''
-                }.css`,
+                plugins: NODE_ENV === 'production' ? [autoprefixer(), cssnano()] : [],
+                extract: true
             }),
-            resolve({
-                mainFields: ['main'],
-            }),
-            commonjs(),
-            eslint({ exclude: ['node_modules/**', 'src/styles/**'] }),
+            resolve(),
             babel({
                 babelrc: true,
             }),
-            process.env.BUILD === 'production' ? terser() : null,
+            commonjs(),
+            globals(),
+            NODE_ENV === 'production' ? terser() : null
         ],
     },
 ];

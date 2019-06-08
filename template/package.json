@@ -3,34 +3,27 @@
     "description": "APEX Nitro template for React apps",
     "version": "1.0.0",
     "dependencies": {
-        "@babel/polyfill": "^7.4.4",
-        "core-js": "^3.1.3"
+        "react": "^16.8.6",
+        "react-dom": "^16.8.6"
     },
     "devDependencies": {
-        "@babel/cli": "^7.4.4",
         "@babel/core": "^7.4.5",
-        "@babel/preset-env": "^7.4.5",
         "@babel/preset-react": "^7.0.0",
-        "@babel/register": "^7.4.4",
         "autoprefixer": "^9.6.0",
         "ava": "2.0.0",
-        "babel-plugin-istanbul": "^5.1.4",
-        "babelify": "^10.0.0",
+        "commander": "^2.20.0",
+        "cross-spawn": "^6.0.5",
         "cssnano": "^4.1.10",
         "eslint": "^5.16.0",
-        "ignore-styles": "^5.0.1",
-        "inquirer": "^6.3.1",
-        "jsdoc": "^3.6.2",
-        "less": "^3.9.0",
+        "eslint-plugin-react": "^7.13.0",
         "rollup": "^1.14.3",
         "rollup-plugin-babel": "^4.3.2",
         "rollup-plugin-commonjs": "^10.0.0",
-        "rollup-plugin-eslint": "^6.0.0",
+        "rollup-plugin-node-globals": "^1.4.0",
         "rollup-plugin-node-resolve": "^5.0.1",
         "rollup-plugin-postcss": "^2.0.3",
         "rollup-plugin-replace": "^2.2.0",
-        "rollup-plugin-terser": "^5.0.0",
-        "semver-regex": "^3.1.0"
+        "rollup-plugin-terser": "^5.0.0"
     },
     "scripts": {
         "build:dev": "node ./nitro/local-build --build-dev",
@@ -38,7 +31,6 @@
         "bundle:dev": "node ./nitro/local-build --bundle-dev",
         "bundle:prod": "node ./nitro/local-build --bundle-prod",
         "lint": "node ./nitro/local-build --lint",
-        "jsdoc": "node ./nitro/local-build --jsdoc",
         "test": "node ./nitro/local-build --test"
     },
     "ava": {

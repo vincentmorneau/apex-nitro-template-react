@@ -1,7 +1,7 @@
 const spawn = require('cross-spawn');
 
 /**
- * @exports stages
+ * @exports
  */
 module.exports = {
     buildDev,
@@ -9,7 +9,6 @@ module.exports = {
     bundleDev,
     bundleProd,
     lint,
-    jsdoc,
     test,
 };
 
@@ -32,7 +31,6 @@ async function buildDev() {
 async function buildProd() {
     await lint();
     await test();
-    await jsdoc();
     await bundleDev();
     await bundleProd();
 }
@@ -62,18 +60,10 @@ async function lint() {
             ['eslint', '-c', '.eslintrc.json', '--ignore-path', '.eslintignore', './src/'],
             'inherit'
         );
-    } catch (err) {
-        console.error(err);
-        process.exit(1);
-    }
-}
 
-async function jsdoc() {
-    try {
-        await runCommand('npx', ['jsdoc', '-c', './jsdoc.conf', '-d', './dist/doc', '-R', './README.md']);
+        return true;
     } catch (err) {
-        console.error(err);
-        process.exit(1);
+        return false;
     }
 }
 

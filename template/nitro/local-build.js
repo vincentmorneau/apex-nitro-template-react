@@ -1,4 +1,4 @@
-const { buildDev, buildProd, bundleDev, bundleProd, jsdoc, lint, test } = require('./build-phases');
+const { buildDev, buildProd, bundleDev, bundleProd, lint, test } = require('./build-phases');
 const commander = require('commander');
 
 if (process.argv.slice(2).length > 0) {
@@ -9,7 +9,6 @@ if (process.argv.slice(2).length > 0) {
         .option('-p --build-prod', 'Build the project in production mode')
         .option('-b --bundle-dev', 'Bundle the project in development mode')
         .option('-r --bundle-prod', 'Bundle the project in production mode')
-        .option('-j --jsdoc', 'Create the JSDoc documentation')
         .option('-l --lint', 'Lint the project')
         .option('-t --test', 'Run tests')
         .parse(process.argv);
@@ -30,10 +29,6 @@ if (process.argv.slice(2).length > 0) {
     } else if (commander.bundleProd) {
         (async () => {
             await bundleProd();
-        })();
-    } else if (commander.jsdoc) {
-        (async () => {
-            await jsdoc();
         })();
     } else if (commander.lint) {
         (async () => {

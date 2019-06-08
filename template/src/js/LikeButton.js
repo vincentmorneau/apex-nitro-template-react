@@ -1,7 +1,6 @@
-import React from 'React';
-import '../css/button.css';
+import React from 'react';
 
-export class LikeButton extends React.Component {
+export default class LikeButton extends React.Component {
   constructor(props) {
     super(props);
     this.state = { liked: false };
@@ -12,6 +11,6 @@ export class LikeButton extends React.Component {
       return "You liked this!!!!";
     }
 
-    return <button onClick={() => this.setState({ liked: true })}>Like</button>;
+    return <button className="my-button" onClick={() => this.setState({ liked: true })}>Like</button>;
   }
 }

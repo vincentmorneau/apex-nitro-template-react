@@ -1,20 +1,27 @@
 {
     "parserOptions": {
-        "ecmaVersion": 10,
-        "sourceType": "module"
+        "ecmaVersion": 6,
+        "sourceType": "module",
+        "ecmaFeatures": {
+            "jsx": true
+        }
     },
     "env": {
         "browser": true,
-        "es6": true,
         "node": true
     },
-    "extends": "eslint:recommended",
-    "globals": {
-        "apex": false
-    },
+    "extends": [
+        "eslint:recommended",
+        "plugin:react/recommended"
+    ],
     "rules": {
         "no-console": [
             "warn"
         ]
+    },
+    "settings": {
+        "react": {
+            "version": "detect"
+        }
     }
 }
