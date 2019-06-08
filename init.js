@@ -42,6 +42,7 @@ function init(appDetails) {
 
                 // set default browsersync settings:
                 config.browsersync = {};
+                config.browsersync.port = 4000;
                 config.browsersync.realTime = true;
                 config.browsersync.ghostMode = false;
                 config.browsersync.notify = true;
