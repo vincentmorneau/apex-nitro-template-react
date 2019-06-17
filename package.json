@@ -15,8 +15,7 @@
         "library"
     ],
     "dependencies": {
-        "inquirer": "^6.3.1",
-        "semver-regex": "^3.1.0"
+        "inquirer": "^6.3.1"
     },
     "devDependencies": {
         "xo": "^0.24.0"

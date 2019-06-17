@@ -46,7 +46,7 @@ async function test() {
  */
 async function bundleDev() {
     try {
-        await runCommand('node', ["./.rescriptbuild.js"]);
+        // await runCommand('node', ["./.rescriptbuild.js"]);
     } catch (err) {
         console.error(err);
         process.exit(1);
