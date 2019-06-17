@@ -1,3 +1,8 @@
-.my-app {
-  background-color: green;
+.t-Region .t-Region-body {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.t-Alert--horizontal, .t-Alert--wizard {
+  margin: 10px;
 }

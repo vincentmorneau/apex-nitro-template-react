@@ -10,7 +10,9 @@ export default class LikeButton extends React.Component {
     if (this.state.liked) {
       return "You liked this!!!!";
     }
-
-    return <button className="my-button" onClick={() => this.setState({ liked: true })}>Like</button>;
+    
+    return <button className="t-Button t-Button--primary" onClick={() => this.setState({ liked: true })}>
+      <span class="t-Button-label">Like</span>
+    </button>;
   }
 }

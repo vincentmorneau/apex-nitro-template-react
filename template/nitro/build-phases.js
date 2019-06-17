@@ -4,60 +4,23 @@ const spawn = require('cross-spawn');
  * @exports
  */
 module.exports = {
-    buildDev,
-    buildProd,
-    bundleDev,
-    bundleProd,
     lint,
     test,
+    bundleDev,
+    bundleProd
 };
-
-/**
- * @function buildDev
- * @returns {PromiseLike}
- * @description Entry point for apex-nitro for building the project
- */
-async function buildDev() {
-    await lint();
-    await bundleDev();
-    await bundleProd();
-}
-
-/**
- * @function buildProd
- * @returns {PromiseLike}
- * @description Entry point for apex-nitro for building the project
- */
-async function buildProd() {
-    await lint();
-    await test();
-    await bundleDev();
-    await bundleProd();
-}
-
-async function bundleDev() {
-    try {
-        await runCommand('npx', ['rollup', '-c', './rollup.config.js', '--environment', 'BUILD:dev']);
-    } catch (err) {
-        console.error(err);
-        process.exit(0);
-    }
-}
-
-async function bundleProd() {
-    try {
-        await runCommand('npx', ['rollup', '-c', './rollup.config.js', '--environment', 'BUILD:production']);
-    } catch (err) {
-        console.error(err);
-        process.exit(1);
-    }
-}
 
 async function lint() {
     try {
         await runCommand(
             'npx',
             ['eslint', '-c', '.eslintrc.json', '--ignore-path', '.eslintignore', './src/'],
+            'inherit'
+        );
+        
+        await runCommand(
+            'npx',
+            ['stylelint', 'src/css/**/*.{css,less,sass,scss}'],
             'inherit'
         );
 
@@ -70,6 +33,34 @@ async function lint() {
 async function test() {
     try {
         await runCommand('npx', ['ava', './test/**/*.test.js'], 'inherit');
+    } catch (err) {
+        console.error(err);
+        process.exit(1);
+    }
+}
+
+/**
+ * @function bundleDev
+ * @returns {PromiseLike}
+ * @description Builds the react project
+ */
+async function bundleDev() {
+    try {
+        await runCommand('node', ["./.rescriptbuild.js"]);
+    } catch (err) {
+        console.error(err);
+        process.exit(1);
+    }
+}
+
+/**
+ * @function bundleProd
+ * @returns {PromiseLike}
+ * @description Builds the react project
+ */
+async function bundleProd() {
+    try {
+        await runCommand('node', ["./.rescriptbuild.js"]);
     } catch (err) {
         console.error(err);
         process.exit(1);

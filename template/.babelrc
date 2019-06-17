@@ -1,4 +1,0 @@
-{
-    "presets": [ "@babel/preset-react" ],
-    "exclude": "node_modules/**"
-}
