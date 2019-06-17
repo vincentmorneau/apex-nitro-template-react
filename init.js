@@ -19,6 +19,7 @@ async function init(appDetails) {
     const config = {
         projectName: appDetails.appName,
         srcFolder: './src',
+        distFolder: './build',
         version: '1.0.0'
     };
 
