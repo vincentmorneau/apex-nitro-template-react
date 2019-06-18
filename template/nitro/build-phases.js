@@ -37,7 +37,7 @@ async function lint() {
 async function test() {
 	try {
 		console.log(chalk.cyan('=> executing tests'));
-		await runCommand('npx', ['ava', './test/**/*.test.js'], 'inherit');
+		await runCommand('npx', ['ava'], 'inherit');
 		return true;
 	} catch (error) {
 		return false;
