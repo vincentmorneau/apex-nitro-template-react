@@ -1,4 +1,5 @@
 const spawn = require('cross-spawn');
+const chalk = require('chalk');
 
 /**
  * @exports
@@ -37,9 +38,9 @@ async function test() {
     try {
         console.log(chalk.cyan('=> executing tests'));
         await runCommand('npx', ['ava', './test/**/*.test.js'], 'inherit');
+        return true;
     } catch (err) {
-        console.error(err);
-        process.exit(1);
+        return false;
     }
 }
 
