@@ -10,6 +10,7 @@
     },
     "devDependencies": {
         "ava": "2.0.0",
+        "chalk": "^2.4.2",
         "cross-spawn": "^6.0.5",
         "eslint": "^5.16.0",
         "eslint-plugin-react": "^7.13.0",

@@ -6,12 +6,15 @@ const spawn = require('cross-spawn');
 module.exports = {
     lint,
     test,
+    buildDev,
+    buildProd,
     bundleDev,
     bundleProd
 };
 
 async function lint() {
     try {
+        console.log(chalk.cyan('=> linting source code'));
         await runCommand(
             'npx',
             ['eslint', '-c', '.eslintrc.json', '--ignore-path', '.eslintignore', './src/'],
@@ -32,11 +35,47 @@ async function lint() {
 
 async function test() {
     try {
+        console.log(chalk.cyan('=> executing tests'));
         await runCommand('npx', ['ava', './test/**/*.test.js'], 'inherit');
     } catch (err) {
         console.error(err);
         process.exit(1);
     }
+}
+
+/**
+ * @function buildDev
+ * @returns {PromiseLike}
+ * @description Entry point for apex-nitro for building the project
+ */
+async function buildDev() {
+    let phaseValid = await lint();
+    if (!phaseValid) {
+        return false;
+    }
+
+    phaseValid = await bundleDev();
+    return phaseValid;
+}
+
+/**
+ * @function buildProd
+ * @returns {PromiseLike}
+ * @description Entry point for apex-nitro for building the project
+ */
+async function buildProd() {
+    let phaseValid = await lint();
+    if (!phaseValid) {
+        return false;
+    }
+
+    phaseValid = await test();
+    if (!phaseValid) {
+        return false;
+    }
+
+    phaseValid = await bundleProd();
+    return phaseValid;
 }
 
 /**
@@ -46,10 +85,12 @@ async function test() {
  */
 async function bundleDev() {
     try {
-        // await runCommand('node', ["./.rescriptbuild.js"]);
+        console.log(chalk.cyan('=> bundling development files'));
+        await runCommand('node', ["./.rescriptbuild.js"]);
+        console.log('');
+        return true;
     } catch (err) {
-        console.error(err);
-        process.exit(1);
+        return false;
     }
 }
 
@@ -60,14 +101,16 @@ async function bundleDev() {
  */
 async function bundleProd() {
     try {
+        console.log(chalk.cyan('=> bundling production files'));
         await runCommand('node', ["./.rescriptbuild.js"]);
+        console.log('');
+        return true;
     } catch (err) {
-        console.error(err);
-        process.exit(1);
+        return false;
     }
 }
 
-function runCommand(command, args, stdioSetting = 'ignore') {
+function runCommand(command, args, stdioSetting = ['ignore', 'ignore', process.stderr]) {
     return new Promise((resolve, reject) => {
         const child = spawn(command, args, {
             cwd: process.cwd(),
