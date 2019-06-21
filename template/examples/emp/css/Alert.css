@@ -1,0 +1,7 @@
+.t-Alert--horizontal.t-Alert--success {
+  box-shadow: 0 5px 13px 5px rgba(0,0,0,.075);
+}
+
+.t-Alert--horizontal, .t-Alert--wizard {
+  margin: 10px;
+}

@@ -13,6 +13,6 @@ config.optimization.splitChunks = {
 config.optimization.runtimeChunk = false;
 
 // JS
-config.output.filename = `static/js/${nitro.projectName}.min.js`;
+config.output.filename = `static/js/${nitro.projectName}.js`;
 // CSS. "5" is MiniCssPlugin
-config.plugins[5].options.filename = `static/css/${nitro.projectName}.min.css`;
+config.plugins[5].options.filename = `static/css/${nitro.projectName}.css`;
